@@ -12,12 +12,19 @@ from fastapi.staticfiles import StaticFiles
 from geojson_pydantic import Feature
 from pydantic import BaseModel, Field
 from rasterio.windows import from_bounds
+from titiler.core.errors import DEFAULT_STATUS_CODES, add_exception_handlers
+from titiler.core.factory import TilerFactory
 
 STATIC_DIR = os.getenv("STATIC_DIR", "static")
 os.makedirs(STATIC_DIR, exist_ok=True)
 
 app = FastAPI(app="Dristi")
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+cog = TilerFactory()
+app.include_router(cog.router, tags=["Cloud Optimized GeoTIFF"])
+
+add_exception_handlers(app, DEFAULT_STATUS_CODES)
 
 client = Client()
 

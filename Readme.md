@@ -1,6 +1,6 @@
 ### Install 
 ```
-pip install fastapi[standard] rasterio numpy shapely dask[complete] geojson-pydantic aiohttp geopandas
+pip install fastapi[standard] rasterio numpy shapely dask[complete] geojson-pydantic aiohttp geopandas titiler
 ```
 
 ### Run 
